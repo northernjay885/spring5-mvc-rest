@@ -1,6 +1,6 @@
 package guru.springfamework.domain;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
