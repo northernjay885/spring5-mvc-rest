@@ -8,7 +8,6 @@ import guru.springfamework.repositories.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
@@ -41,7 +40,7 @@ public class CustomerServiceImpl implements CustomerService {
         if (customerRepository.findById(id).isPresent()) {
             customer = customerRepository.findById(id).get();
         } else {
-            throw new RuntimeException("No such customer !");
+            throw new ResourceNotFoundException();
         }
         CustomerDTO customerDTO = customerMapper.customerToCustomerDTO(customer);
         customerDTO.setCustomerUrl(getCustomerUrl(customer.getId()));
@@ -79,7 +78,7 @@ public class CustomerServiceImpl implements CustomerService {
 
             returnDto.setCustomerUrl(getCustomerUrl(id));
             return returnDto;
-        }).orElseThrow(RuntimeException::new);
+        }).orElseThrow(ResourceNotFoundException::new);
     }
 
     @Override
